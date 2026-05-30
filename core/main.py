@@ -62,25 +62,16 @@ def dele(name_id:int):
        namelists.remove(items)
        return {"deatel:pak shod"}
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="peid nashod")
-
+#استفاده از کوئری ها
 @app.get("/search",status_code=200)
 def re(q:str|None =Query(default=None,max_length=50,alias="update",title="update mikoned",description="anjam update")):
    if q:
       return [item for item in namelists if item['name']==q]
    return namelists
-# @app.post("/upload/")
-# async def upload_file(file:bytes=File(...)):
-#  return {"file size":len(file)}
-
-
-
-
-
-
-
 @app.post("/files/")
+#خواندن فایل
 async def create_file(
-    file: Annotated[bytes, File()],
+    file: Annotated[bytes, File()]
 ):
     return {
         "file_size": len(file),
